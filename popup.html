@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Fact Checker</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        margin: 0;
+        padding: 15px;
+        width: 300px;
+        background-color: #f9f9f9;
+        color: #333;
+        line-height: 1.5;
+      }
+      h1 {
+        font-size: 18px;
+        margin: 0 0 15px;
+        text-align: center;
+        color: #2c3e50;
+      }
+      .simplify-button {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #3498db;
+        background-color: #3498db;
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+      }
+      .simplify-button:hover {
+        background-color: #2980b9;
+        border-color: #2980b9;
+      }
+      .simplify-button:active {
+        transform: scale(0.98);
+      }
+      .simplify-button:disabled {
+        background-color: #bdc3c7;
+        border-color: #bdc3c7;
+        cursor: not-allowed;
+      }
+      #status {
+        font-size: 12px;
+        text-align: center;
+        margin: 10px 0;
+        color: #7f8c8d;
+        display: none; /* Hidden by default */
+      }
+      #fakeOrReal {
+        font-size: 14px;
+        font-weight: 600;
+        text-align: center;
+        margin: 10px 0;
+        padding: 5px 10px;
+        border-radius: 3px;
+      }
+      #fakeOrReal.real {
+        background-color: #27ae60;
+        color: white;
+      }
+      #fakeOrReal.fake {
+        background-color: #e74c3c;
+        color: white;
+      }
+      #resultText {
+        font-size: 13px;
+        margin-top: 15px;
+      }
+      #resultText a {
+        color: #3498db;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 8px;
+        word-wrap: break-word;
+      }
+      #resultText a:hover {
+        text-decoration: underline;
+      }
+      #status.loading::before {
+        content: "";
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border: 2px solid #3498db;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-right: 5px;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Health Fact Checker</h1>
+    <button id="simplifyBtn" class="simplify-button">Check Health Facts</button>
+    <p id="status">Loading...</p>
+    <p id="fakeOrReal"></p>
+    <p id="resultText"></p>
+    <script src="popup.js"></script>
+  </body>
+</html>
