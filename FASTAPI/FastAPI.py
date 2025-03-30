@@ -13,7 +13,7 @@ import re
 
 load_dotenv()
 
-Gemini_API_KEY = "AIzaSyBi0dvebVigXIIpCZoukGCswaD6_xjO-oA"
+Gemini_API_KEY = "APIKEY"
 genai.configure(api_key=Gemini_API_KEY)
 model = genai.GenerativeModel('gemini-2.0-flash')
 
