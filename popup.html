@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -20,11 +20,17 @@
         text-align: center;
         color: #2c3e50;
       }
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
       .simplify-button {
         width: 100%;
         padding: 10px;
-        border: 2px solid #3498db;
-        background-color: #3498db;
+        border: 2px solid #8534db;
+        background-color: #8534db;
         color: white;
         font-size: 14px;
         font-weight: 600;
@@ -33,8 +39,8 @@
         transition: all 0.3s ease;
       }
       .simplify-button:hover {
-        background-color: #2980b9;
-        border-color: #2980b9;
+        background-color: #58159f;
+        border-color: #58159f;
       }
       .simplify-button:active {
         transform: scale(0.98);
@@ -43,21 +49,58 @@
         background-color: #bdc3c7;
         border-color: #bdc3c7;
         cursor: not-allowed;
+        opacity: 0.7;
+      }
+      .search-container {
+        display: flex;
+        margin-bottom: 15px;
+        background-color: white;
+        border: 2px solid #8534db;
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .search-container input[type="text"] {
+        flex: 1;
+        padding: 10px 15px;
+        border: none;
+        outline: none;
+        font-size: 14px;
+      }
+      .search-container button {
+        padding: 10px 20px;
+        border: none;
+        background-color: #8534db;
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .search-container button:hover {
+        background-color: #58159f;
+      }
+      .search-container button:disabled {
+        background-color: #bdc3c7;
+        cursor: not-allowed;
+        opacity: 0.7;
       }
       #status {
         font-size: 12px;
         text-align: center;
         margin: 10px 0;
         color: #7f8c8d;
-        display: none; /* Hidden by default */
+        display: none;
       }
-      #fakeOrReal {
+      #fakeOrReal,
+      #glossary {
         font-size: 14px;
         font-weight: 600;
         text-align: center;
         margin: 10px 0;
         padding: 5px 10px;
         border-radius: 3px;
+        background-color: #ecf0f1;
       }
       #fakeOrReal.real {
         background-color: #27ae60;
@@ -66,6 +109,10 @@
       #fakeOrReal.fake {
         background-color: #e74c3c;
         color: white;
+      }
+      #glossary {
+        background-color: #f1c40f;
+        color: #333;
       }
       #resultText {
         font-size: 13px;
@@ -81,29 +128,181 @@
       #resultText a:hover {
         text-decoration: underline;
       }
-      #status.loading::before {
-        content: "";
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        border: 2px solid #3498db;
-        border-top-color: transparent;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin-right: 5px;
+    </style>
+  </head>
+  <body>
+    <h1>Health Fact Checker</h1>
+    <div class="button-container">
+      <button id="simplifyBtn" class="simplify-button">Summarize</button>
+      <button id="factCheckBtn" class="simplify-button">Fact Check</button>
+    </div>
+
+    <p id="status"></p>
+    <p id="fakeOrReal"></p>
+
+    <p id="resultText"></p>
+    <div class="search-container">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Enter a word to define..."
+      />
+      <button id="searchBtn">Search</button>
+    </div>
+    <p id="glossary"></p>
+    <script src="popup.js"></script>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Fact Checker</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        width: 500px; /* Increased from 300px */
+        background-color: #f9f9f9;
+        color: #333;
+        line-height: 1.5;
       }
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
+      h1 {
+        font-size: 20px; /* Slightly larger for better readability */
+        margin: 0 0 20px;
+        text-align: center;
+        color: #2c3e50;
+      }
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        gap: 12px; /* Slightly more spacing */
+        margin-bottom: 20px;
+      }
+      .simplify-button {
+        width: 100%;
+        padding: 12px; /* Slightly taller buttons */
+        border: 2px solid #8534db;
+        background-color: #8534db;
+        color: white;
+        font-size: 16px; /* Larger text */
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+      }
+      .simplify-button:hover {
+        background-color: #58159f;
+        border-color: #58159f;
+      }
+      .simplify-button:active {
+        transform: scale(0.98);
+      }
+      .simplify-button:disabled {
+        background-color: #bdc3c7;
+        border-color: #bdc3c7;
+        cursor: not-allowed;
+        opacity: 0.7;
+      }
+      .search-container {
+        display: flex;
+        margin-bottom: 20px;
+        background-color: white;
+        border: 2px solid #8534db;
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .search-container input[type="text"] {
+        flex: 1;
+        padding: 12px 15px; /* Match button height */
+        border: none;
+        outline: none;
+        font-size: 16px; /* Larger text */
+      }
+      .search-container button {
+        padding: 12px 25px; /* Slightly wider */
+        border: none;
+        background-color: #8534db;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .search-container button:hover {
+        background-color: #58159f;
+      }
+      .search-container button:disabled {
+        background-color: #bdc3c7;
+        cursor: not-allowed;
+        opacity: 0.7;
+      }
+      #status {
+        font-size: 14px; /* Larger for readability */
+        text-align: center;
+        margin: 10px 0;
+        color: #7f8c8d;
+        display: none;
+      }
+      #fakeOrReal,
+      #glossary {
+        font-size: 16px; /* Larger text */
+        font-weight: 600;
+        text-align: center;
+        margin: 10px 0;
+        padding: 8px 12px; /* More padding */
+        border-radius: 3px;
+        background-color: #ecf0f1;
+      }
+      #fakeOrReal.real {
+        background-color: #27ae60;
+        color: white;
+      }
+      #fakeOrReal.fake {
+        background-color: #e74c3c;
+        color: white;
+      }
+      #glossary {
+        background-color: #f1c40f;
+        color: #333;
+      }
+      #resultText {
+        font-size: 14px; /* Slightly larger */
+        margin-top: 15px;
+      }
+      #resultText a {
+        color: #3498db;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 10px;
+        word-wrap: break-word;
+      }
+      #resultText a:hover {
+        text-decoration: underline;
       }
     </style>
   </head>
   <body>
     <h1>Health Fact Checker</h1>
-    <button id="simplifyBtn" class="simplify-button">Check Health Facts</button>
-    <p id="status">Loading...</p>
+    <div class="button-container">
+      <button id="simplifyBtn" class="simplify-button">Summarize</button>
+      <button id="factCheckBtn" class="simplify-button">Fact Check</button>
+    </div>
+    <div class="search-container">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Enter a word to define..."
+      />
+      <button id="searchBtn">Search</button>
+    </div>
+    <p id="status"></p>
     <p id="fakeOrReal"></p>
+    <p id="glossary"></p>
     <p id="resultText"></p>
     <script src="popup.js"></script>
   </body>
