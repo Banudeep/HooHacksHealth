@@ -173,10 +173,10 @@ document.addEventListener("DOMContentLoaded", () => {
     fakeOrRealEl.style.borderRadius = "3px";
     fakeOrRealEl.style.textAlign = "center";
     fakeOrRealEl.style.fontWeight = "600";
-    if (verdict === "Real") {
+    if (verdict === "True") {
       fakeOrRealEl.style.backgroundColor = "#27ae60"; // Green
       fakeOrRealEl.style.color = "white";
-    } else if (verdict === "Fake") {
+    } else if (verdict === "False") {
       fakeOrRealEl.style.backgroundColor = "#e74c3c"; // Red
       fakeOrRealEl.style.color = "white";
     }

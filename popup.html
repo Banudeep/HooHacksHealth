@@ -159,7 +159,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Health Fact Checker</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Health Info Explorer</title>
     <style>
       body {
         font-family: "Segoe UI", Arial, sans-serif;
@@ -171,10 +175,20 @@
         line-height: 1.5;
       }
       h1 {
-        font-size: 20px; /* Slightly larger for better readability */
-        margin: 0 0 20px;
+        font-family: "Roboto Slab", serif; /* Roboto Slab for header */
+        font-size: 26px;
+        font-weight: 700;
+        color: #ffffff; /* White color for contrast */
+        background-color: #8534db; /* Deep blue for high contrast */
+        padding: 10px 0; /* Padding for a better look */
+        margin: -20px -20px 20px -20px; /* Aligning with the body's padding */
+        border-radius: 0 0 0 0; /* Rounded top corners */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
         text-align: center;
-        color: #2c3e50;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
       }
       .button-container {
         display: flex;
@@ -287,7 +301,7 @@
     </style>
   </head>
   <body>
-    <h1>Health Fact Checker</h1>
+    <h1>Health Info Explorer</h1>
     <div class="button-container">
       <button id="simplifyBtn" class="simplify-button">Summarize</button>
       <button id="factCheckBtn" class="simplify-button">Fact Check</button>
@@ -296,7 +310,7 @@
       <input
         type="text"
         id="searchInput"
-        placeholder="Enter a word to define..."
+        placeholder="Search for a glossary.."
       />
       <button id="searchBtn">Search</button>
     </div>

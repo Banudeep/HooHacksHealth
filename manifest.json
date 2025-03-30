@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Health Facts Checker",
+  "name": "Health Intel Explorer",
   "version": "1.0",
   "description": "Plugin to check health facts, provide suggestions and simplify the content",
   "permissions": ["activeTab", "scripting", "commands", "storage"],
